@@ -1,0 +1,38 @@
+{
+  "name": "mumu-portal-pc",
+  "version": "1.0.0",
+  "description": "Mumu Portal PC Frontend",
+  "private": true,
+  "scripts": {
+    "dev": "max dev",
+    "build": "max build",
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "lint:style": "stylelint \"**/*.{less,css}\" --fix",
+    "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
+    "test": "max test",
+    "test:component": "max test ./src/components",
+    "preview": "npm run build && max preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "@ant-design/pro-components": "^2.8.10",
+    "@umijs/max": "^4.5.1",
+    "antd": "^5.27.4",
+    "dayjs": "^1.11.18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.25",
+    "@types/react-dom": "^18.3.7",
+    "@umijs/lint": "^4.5.1",
+    "eslint": "^8.57.1",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.25.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
