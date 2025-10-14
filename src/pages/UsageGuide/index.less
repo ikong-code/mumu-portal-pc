@@ -3,15 +3,249 @@
   min-height: 100vh;
   background: #fff;
 
-  // 顶部横幅区域
-  .banner-section {
+  // 数据共享页面样式
+  .data-sharing-section {
+    width: 100%;
+    background: #fff;
+    padding: 60px 0;
+
+    .data-sharing-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+
+      .data-sharing-header {
+        text-align: center;
+        margin-bottom: 60px;
+
+        .data-sharing-title {
+          color: #000 !important;
+          font-size: 38px !important;
+          font-weight: bold !important;
+          margin-bottom: 20px !important;
+        }
+
+        .data-sharing-subtitle {
+          color: #000;
+          font-size: 18px !important;
+          margin: 0 !important;
+          line-height: 1.6;
+        }
+      }
+
+      .data-sharing-content {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+
+        .data-sharing-left,
+        .data-sharing-right {
+          flex: 1;
+          padding: 40px 0;
+          text-align: center;
+
+          .content-title {
+            color: #000 !important;
+            font-size: 24px !important;
+            font-weight: bold !important;
+            margin-bottom: 30px !important;
+          }
+
+          .content-text {
+            color: #000;
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+            margin-bottom: 30px !important;
+          }
+
+          .content-button {
+            background: #f0a13e !important;
+            border-color: #f0a13e !important;
+            color: white !important;
+            padding: 10px 30px !important;
+            height: auto !important;
+            font-size: 16px !important;
+            display: block;
+            margin: 0 auto;
+            border-radius: 20px;
+          }
+        }
+
+        .data-sharing-center {
+          flex: 0 0 300px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .circular-image-frame {
+            position: relative;
+            width: 300px;
+            height: 300px;
+
+            .circular-image {
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+              position: relative;
+
+              .frame-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 标注平台使用区域
+  .annotation-platform-section {
+    width: 100%;
+    background: #fff;
+    padding: 80px 0;
+
+    .annotation-platform-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+
+      .annotation-platform-content {
+        display: flex;
+        align-items: center;
+        border: 1px solid #e8e8e8;
+
+        .annotation-platform-left {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .annotation-platform-title {
+            color: #000 !important;
+            font-size: 38px !important;
+            font-weight: bold !important;
+            margin-bottom: 20px !important;
+            line-height: 1.2 !important;
+          }
+
+          .annotation-platform-subtitle {
+            color: #666 !important;
+            font-size: 20px !important;
+            font-weight: 500 !important;
+            margin-bottom: 40px !important;
+            line-height: 1.4 !important;
+          }
+
+          .annotation-platform-description {
+            margin-bottom: 40px;
+            padding: 0 40px;
+
+            .description-text {
+              color: #000 !important;
+              font-size: 16px !important;
+              text-align: left;
+              margin-bottom: 0;
+            }
+          }
+
+          .annotation-platform-button {
+            background: #f0a13e !important;
+            border-color: #f0a13e !important;
+            color: white !important;
+            padding: 12px 30px !important;
+            height: auto !important;
+            font-size: 16px !important;
+            border-radius: 25px !important;
+            font-weight: 500 !important;
+            box-shadow: 0 2px 8px rgba(247, 168, 76, 0.3);
+            transition: all 0.3s ease;
+            padding: 0 40px 40px 40px;
+          }
+        }
+
+        .annotation-platform-right {
+          width: 60%;
+
+          .laptop-image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            .laptop-image {
+              width: 100%;
+              height: 100%;
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 云盘与数据标注区域
+  .cloud-disk-section {
     position: relative;
     height: 400px;
-    background: linear-gradient(rgba(102, 179, 102, 0.8), rgba(102, 179, 102, 0.8)), 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%2366B366" width="1200" height="400"/><path fill="%2355A055" d="M0,200 Q300,150 600,200 T1200,200 L1200,400 L0,400 Z"/></svg>');
+    background-image: url('@/assets/images/usage-guide/usage-bg2.png'); // 背景图片地址稍后填充
     background-size: cover;
     background-position: center;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    .cloud-disk-container {
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+
+      .cloud-disk-title {
+        color: white !important;
+        font-size: 38px !important;
+        font-weight: bold !important;
+        margin-bottom: 40px !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .cloud-disk-description {
+        color: white !important;
+        font-size: 18px;
+        margin: 0 0 50px 0;
+        line-height: 1.6;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .cloud-disk-button {
+        background: linear-gradient(135deg, #FFA500, #FF8C00) !important;
+        border-color: transparent !important;
+        color: white !important;
+        padding: 12px 30px !important;
+        height: auto !important;
+        font-size: 16px !important;
+        border-radius: 25px !important;
+        font-weight: 500 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+  }
+
+  // 顶部横幅区域
+  .banner-section {
+    position: relative;
+    padding: 80px 0 20px;
+    background: url('@/assets/images/usage-guide/usage-bg3.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: white;
@@ -23,7 +257,7 @@
 
       .banner-title {
         color: white !important;
-        font-size: 48px !important;
+        font-size: 38px !important;
         font-weight: bold !important;
         margin-bottom: 20px !important;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -42,87 +276,120 @@
   // 中间内容面板
   .content-panels {
     display: flex;
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 60px auto;
-    padding: 0 20px;
     position: relative;
+    background: linear-gradient(135deg, #66B366, #55A055);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
     .panel-left {
       flex: 1;
       background: white;
-      padding: 40px;
-      margin-right: -20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 60px 50px;
       position: relative;
       z-index: 2;
-      clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 100%, 0 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       .panel-title {
-        color: #333 !important;
+        color: #000 !important;
         font-size: 28px !important;
         font-weight: bold !important;
-        margin-bottom: 20px !important;
-        text-align: left;
+        margin-bottom: 30px !important;
+        text-align: center;
       }
 
       .panel-text {
-        color: #666 !important;
+        color: #000;
         font-size: 16px !important;
         line-height: 1.8 !important;
-        margin-bottom: 30px !important;
+        margin-bottom: 40px !important;
         text-align: left;
       }
 
       .panel-button {
-        background: #F7A84C !important;
-        border-color: #F7A84C !important;
+        background: #f0a13e !important;
+        border-color: #f0a13e !important;
         color: white !important;
-        padding: 12px 30px !important;
+        padding: 15px 40px !important;
         height: auto !important;
         font-size: 16px !important;
-        border-radius: 6px !important;
+        border-radius: 25px !important;
         display: block;
         margin: 0 auto;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #e0993a !important;
+          border-color: #e0993a !important;
+          transform: translateY(-2px);
+        }
       }
     }
 
     .panel-right {
       flex: 1;
-      background: #F7A84C;
-      padding: 40px;
-      margin-left: -20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      background: #f0a13e;
+      padding: 60px 50px;
       position: relative;
       z-index: 1;
-      clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       .panel-title {
         color: white !important;
         font-size: 28px !important;
         font-weight: bold !important;
-        margin-bottom: 20px !important;
-        text-align: left;
+        margin-bottom: 30px !important;
+        text-align: center;
       }
 
       .panel-text {
         color: white !important;
         font-size: 16px !important;
         line-height: 1.8 !important;
-        margin-bottom: 30px !important;
+        margin-bottom: 40px !important;
         text-align: left;
       }
 
       .panel-button-white {
         background: white !important;
         border-color: white !important;
-        color: #F7A84C !important;
-        padding: 12px 30px !important;
+        color: #f0a13e !important;
+        padding: 15px 40px !important;
         height: auto !important;
         font-size: 16px !important;
-        border-radius: 6px !important;
+        border-radius: 25px !important;
         display: block;
         margin: 0 auto;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #f5f5f5 !important;
+          border-color: #f5f5f5 !important;
+          transform: translateY(-2px);
+        }
       }
+    }
+
+    // 绿色分隔线
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: calc(33.33% - 30px);
+      bottom: 0;
+      width: 2px;
+      background: #66B366;
+      z-index: 3;
+      transform: rotate(15deg);
+      transform-origin: center;
     }
   }
 
@@ -130,25 +397,25 @@
   .tutorial-section {
     background: white;
     padding: 60px 20px;
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
 
     .tutorial-header {
       margin-bottom: 40px;
 
       .tutorial-title {
-        color: #333 !important;
-        font-size: 32px !important;
+        color: #000 !important;
+        font-size: 38px !important;
         font-weight: bold !important;
         margin-bottom: 10px !important;
-        text-align: left;
+        text-align: center;
       }
 
       .tutorial-subtitle {
-        color: #666 !important;
+        color: #000;
         font-size: 18px !important;
         margin: 0 !important;
-        text-align: left;
+        text-align: center;
       }
     }
 
@@ -186,7 +453,7 @@
         }
 
         .tutorial-card-title {
-          color: #333 !important;
+          color: #000 !important;
           font-size: 18px !important;
           font-weight: bold !important;
           margin-bottom: 15px !important;
@@ -194,7 +461,7 @@
         }
 
         .tutorial-card-text {
-          color: #666 !important;
+          color: #000;
           font-size: 14px !important;
           line-height: 1.6 !important;
           margin: 0 !important;
@@ -219,87 +486,6 @@
           font-size: 18px !important;
           border-radius: 6px !important;
           font-weight: bold !important;
-        }
-      }
-    }
-  }
-
-  // 响应式设计
-  @media (max-width: 768px) {
-    .banner-section {
-      height: 300px;
-      
-      .banner-content {
-        .banner-title {
-          font-size: 36px !important;
-        }
-        
-        .banner-subtitle {
-          font-size: 16px !important;
-        }
-      }
-    }
-
-    .content-panels {
-      flex-direction: column;
-      margin: 40px auto;
-      
-      .panel-left,
-      .panel-right {
-        margin: 0 0 20px 0;
-        clip-path: none;
-        padding: 30px 20px;
-      }
-    }
-
-    .tutorial-section {
-      padding: 40px 20px;
-      
-      .tutorial-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-  }
-
-  @media (max-width: 480px) {
-    .banner-section {
-      height: 250px;
-      
-      .banner-content {
-        .banner-title {
-          font-size: 28px !important;
-        }
-        
-        .banner-subtitle {
-          font-size: 14px !important;
-        }
-      }
-    }
-
-    .content-panels {
-      .panel-left,
-      .panel-right {
-        padding: 20px 15px;
-        
-        .panel-title {
-          font-size: 24px !important;
-        }
-        
-        .panel-text {
-          font-size: 14px !important;
-        }
-      }
-    }
-
-    .tutorial-section {
-      .tutorial-header {
-        .tutorial-title {
-          font-size: 28px !important;
-        }
-        
-        .tutorial-subtitle {
-          font-size: 16px !important;
         }
       }
     }

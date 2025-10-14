@@ -63,7 +63,7 @@ const Products: React.FC = () => {
         color: 'white',
         marginBottom: '60px'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <Title level={1} style={{ color: 'white', fontSize: '42px', marginBottom: '16px' }}>
             产品方案
           </Title>
@@ -78,7 +78,7 @@ const Products: React.FC = () => {
       </div>
 
       {/* Products Section */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <Row gutter={[32, 32]} justify="center">
           {products.map((product, index) => (
             <Col xs={24} sm={12} lg={8} key={index}>

@@ -6,7 +6,7 @@
 }
 
 .data-collection-list {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 40px 0;
 }
@@ -19,6 +19,9 @@
   margin-bottom: 24px;
   overflow: hidden;
   height: 360px; // 固定高度确保一致性
+}
+.data-collection-item-reverse {
+  flex-direction: row-reverse;
 }
 
 // 左侧图片区域 - 50%宽度
@@ -103,7 +106,7 @@
 // 右侧文字介绍区域 - 50%宽度，36px内边距
 .item-content-section {
   width: 50%;
-  padding: 36px 24px 36px 0; // 按要求36px内边距
+  padding: 36px 0 36px 0; // 按要求36px内边距
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -145,13 +148,13 @@
   background: #f0a13e;
   border-color: #f0a13e;
   border-radius: 6px;
-  height: 32px;
-  font-size: 14px;
-  border-radius: 16px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 20px;
   font-weight: 500;
   align-self: flex-start;
   min-width: 100px;
-  
+  padding: 0 24px;
   &:hover {
     background: #f0a13e !important;
     border-color: #f0a13e;
@@ -163,23 +166,3 @@
   }
 }
 
-// 响应式设计
-@media (max-width: 768px) {
-  .data-collection-item {
-    flex-direction: column;
-    height: auto;
-  }
-  
-  .item-image-section,
-  .item-content-section {
-    width: 100%;
-  }
-  
-  .item-image-section {
-    height: 200px;
-  }
-  
-  .item-content-section {
-    padding: 24px;
-  }
-}

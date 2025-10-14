@@ -124,7 +124,7 @@ const PlatformIntro: React.FC = () => {
         background: 'white',
         padding: '80px 0'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <Row gutter={[100, 32]}>
             <Col xs={14}>
               <div id="map-container" style={{

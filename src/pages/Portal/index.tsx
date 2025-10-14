@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         color: 'white',
         marginBottom: '60px'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <Title level={1} style={{ color: 'white', fontSize: '48px', marginBottom: '24px' }}>
             欢迎来到 Mumu Portal
           </Title>
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* Features Section */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <Title level={2} style={{ textAlign: 'center', marginBottom: '60px' }}>
           核心特性
         </Title>

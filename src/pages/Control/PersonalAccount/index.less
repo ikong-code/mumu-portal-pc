@@ -1,0 +1,59 @@
+.personal-account {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    h2 {
+      margin: 0;
+      color: #333;
+    }
+  }
+
+  .user-avatar {
+    text-align: center;
+    
+    .user-email {
+      margin-top: 10px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .avatar-uploader {
+      :global(.ant-upload) {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .upload-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 12px;
+        
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    margin-top: 20px;
+    text-align: right;
+  }
+}

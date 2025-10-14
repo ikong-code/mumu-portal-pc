@@ -55,7 +55,7 @@ const LoginConsole: React.FC = () => {
         color: 'white',
         marginBottom: '60px'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <Title level={1} style={{ color: 'white', fontSize: '36px', marginBottom: '16px' }}>
             登录控制台
           </Title>
@@ -69,7 +69,7 @@ const LoginConsole: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <Row gutter={[48, 48]} align="middle">
           {/* Login/Register Form */}
           <Col xs={24} lg={12}>
@@ -344,7 +344,7 @@ const LoginConsole: React.FC = () => {
         padding: '60px 0',
         marginTop: '80px'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <Row gutter={[48, 32]}>
             <Col xs={24} lg={8}>
               <div style={{ textAlign: 'center' }}>

@@ -7,8 +7,8 @@ import {
   EyeTwoTone
 } from '@ant-design/icons';
 import { useNavigate } from '@umijs/max';
-import loginLogo from '@/assets/images/login-logo.jpg';
-import loginBg from '@/assets/images/loginBg.jpg';
+import loginLogo from '@/assets/images/logo.png';
+import loginBg from '@/assets/images/login-bg.png';
 import './index.less';
 
 const { Title, Paragraph, Text } = Typography;

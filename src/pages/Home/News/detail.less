@@ -1,0 +1,306 @@
+.news-detail-container {
+  background: #fff;
+  min-height: 100vh;
+  padding: 40px 0;
+
+  .news-detail-header {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .news-detail-breadcrumb {
+      .ant-breadcrumb {
+        font-size: 14px;
+
+        .ant-breadcrumb-link {
+          color: #8c8c8c;
+        }
+
+        .ant-breadcrumb-separator {
+          color: #8c8c8c;
+        }
+      }
+    }
+
+    .news-detail-back-btn {
+      border-radius: 6px;
+      height: 36px;
+      padding: 0 16px;
+      border-color: #d9d9d9;
+      color: #595959;
+
+      &:hover {
+        border-color: #fa8c16;
+        color: #fa8c16;
+      }
+    }
+  }
+
+  .news-detail-content-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    .news-detail-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+    }
+
+    .news-detail-card {
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid #f0f0f0;
+
+      .ant-card-body {
+        padding: 40px;
+      }
+
+      .news-detail-meta {
+        margin-bottom: 24px;
+
+        .news-detail-date {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: #8c8c8c;
+          font-size: 14px;
+
+          .anticon {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .news-detail-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #262626;
+        line-height: 1.4;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      .news-detail-image {
+        margin: 32px 0;
+        text-align: center;
+
+        img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .news-detail-description {
+        margin-bottom: 32px;
+        padding: 20px;
+        background: #fafafa;
+        border-radius: 8px;
+        border-left: 4px solid #fa8c16;
+
+        .ant-typography {
+          font-size: 16px;
+          color: #595959;
+          line-height: 1.6;
+          margin: 0;
+        }
+      }
+
+      .news-detail-body {
+        .news-detail-content {
+          font-size: 16px;
+          line-height: 1.8;
+          color: #262626;
+
+          p {
+            margin-bottom: 16px;
+            text-align: justify;
+          }
+
+          img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+
+          h1, h2, h3, h4, h5, h6 {
+            margin: 24px 0 16px 0;
+            color: #262626;
+            font-weight: 600;
+          }
+
+          h1 { font-size: 24px; }
+          h2 { font-size: 22px; }
+          h3 { font-size: 20px; }
+          h4 { font-size: 18px; }
+          h5 { font-size: 16px; }
+          h6 { font-size: 14px; }
+
+          ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+
+            li {
+              margin-bottom: 8px;
+            }
+          }
+
+          blockquote {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: #fafafa;
+            border-left: 4px solid #fa8c16;
+            border-radius: 0 8px 8px 0;
+          }
+
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+
+            th, td {
+              padding: 12px;
+              border: 1px solid #f0f0f0;
+              text-align: left;
+            }
+
+            th {
+              background: #fafafa;
+              font-weight: 600;
+            }
+          }
+
+          a {
+            color: #fa8c16;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+          }
+
+          pre {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+
+            code {
+              background: none;
+              padding: 0;
+            }
+          }
+        }
+      }
+
+      .news-detail-empty {
+        text-align: center;
+        padding: 60px 0;
+        color: #8c8c8c;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .news-detail-container {
+    padding: 20px 0;
+
+    .news-detail-header {
+      padding: 0 16px;
+      margin-bottom: 20px;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+
+      .news-detail-breadcrumb {
+        order: 2;
+      }
+
+      .news-detail-back-btn {
+        order: 1;
+      }
+    }
+
+    .news-detail-content-wrapper {
+      padding: 0 16px;
+
+      .news-detail-card {
+        .ant-card-body {
+          padding: 24px;
+        }
+
+        .news-detail-title {
+          font-size: 22px;
+        }
+
+        .news-detail-description {
+          padding: 16px;
+
+          .ant-typography {
+            font-size: 14px;
+          }
+        }
+
+        .news-detail-body {
+          .news-detail-content {
+            font-size: 14px;
+            line-height: 1.6;
+
+            h1 { font-size: 20px; }
+            h2 { font-size: 18px; }
+            h3 { font-size: 16px; }
+            h4 { font-size: 15px; }
+            h5 { font-size: 14px; }
+            h6 { font-size: 13px; }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .news-detail-container {
+    .news-detail-content-wrapper {
+      .news-detail-card {
+        .ant-card-body {
+          padding: 16px;
+        }
+
+        .news-detail-title {
+          font-size: 20px;
+        }
+
+        .news-detail-image {
+          margin: 24px 0;
+        }
+
+        .news-detail-description {
+          margin-bottom: 24px;
+          padding: 12px;
+        }
+      }
+    }
+  }
+}

@@ -23,7 +23,20 @@ export default defineConfig({
     {
       name: '首页',
       path: '/home',
-      component: './Home',
+      routes: [
+        {
+          path: '/home',
+          component: './Home/index',
+        },
+        {
+          path: '/home/news',
+          component: './Home/News/List',
+        },
+        {
+          path: '/home/news/:id',
+          component: './Home/News/Detail',
+        }
+      ],
     },
     {
       name: '平台介绍',
@@ -33,7 +46,16 @@ export default defineConfig({
     {
       name: '数据汇交',
       path: '/data-exchange',
-      component: './DataExchange',
+      routes: [
+        {
+          path: '/data-exchange',
+          component: './DataExchange/index',
+        },
+        {
+          path: '/data-exchange/detail',
+          component: './DataExchange/Detail',
+        },
+      ],
     },
     {
       name: '数据征集',
@@ -49,6 +71,47 @@ export default defineConfig({
       name: '登录控制台',
       path: '/login-console',
       component: './LoginConsole',
+    },
+    {
+      name: '个人中心',
+      path: '/control',
+      component: './Control',
+      routes: [
+        {
+          path: '/control',
+          redirect: '/control/personal-account',
+        },
+        {
+          name: '我的云盘',
+          path: '/control/cloud-drive',
+          component: './Control/CloudDrive',
+        },
+        {
+          name: '我的标注任务',
+          path: '/control/annotation-tasks',
+          component: './Control/AnnotationTasks',
+        },
+        {
+          name: '我的数据集',
+          path: '/control/datasets',
+          component: './Control/Datasets',
+        },
+        {
+          name: '我的数据需求',
+          path: '/control/data-requirements',
+          component: './Control/DataRequirements',
+        },
+        {
+          name: '我的提交数据',
+          path: '/control/submitted-data',
+          component: './Control/SubmittedData',
+        },
+        {
+          name: '个人账户',
+          path: '/control/personal-account',
+          component: './Control/PersonalAccount',
+        },
+      ],
     },
   ],
   npmClient: 'npm',
