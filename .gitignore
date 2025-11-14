@@ -16,7 +16,7 @@ node_modules/
 .idea/
 *.swp
 *.swo
-
+dist/
 # OS
 .DS_Store
 Thumbs.db
