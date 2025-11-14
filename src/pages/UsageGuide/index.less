@@ -279,8 +279,6 @@
     max-width: 1280px;
     margin: 60px auto;
     position: relative;
-    background: linear-gradient(135deg, #66B366, #55A055);
-    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
@@ -293,7 +291,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-
+      margin-right: 4px;
       .panel-title {
         color: #000 !important;
         font-size: 28px !important;
@@ -376,20 +374,6 @@
           transform: translateY(-2px);
         }
       }
-    }
-
-    // 绿色分隔线
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: calc(33.33% - 30px);
-      bottom: 0;
-      width: 2px;
-      background: #66B366;
-      z-index: 3;
-      transform: rotate(15deg);
-      transform-origin: center;
     }
   }
 

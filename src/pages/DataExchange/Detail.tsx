@@ -51,7 +51,7 @@ const DataExchangeDetail: React.FC = () => {
     try {
       setLoading(true);
     //   const data = await axios.get(`/system/dataset/${id}`, {
-    //     baseURL: 'https://api.ai4as.cn'
+    //     baseURL: 'http://47.99.151.88:10105'
     //   });
       const data = MOCK_DETAIL;
       if (data.code === 200) {
@@ -207,7 +207,7 @@ const DataExchangeDetail: React.FC = () => {
           {/* 右侧内容 */}
           <Col span={8}>
             {/* 元数据 */}
-            <Card title="元数据" className="metadata-card">
+            <Card title="元数据" className="info-card" style={{ height: 'calc(100% - 24px)' }}>
               <div className="metadata-item">
                 <div className="metadata-label">
                   <Text>是否涉及动物伦理</Text>

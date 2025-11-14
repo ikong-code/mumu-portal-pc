@@ -32,7 +32,7 @@ const DataExchange: React.FC = () => {
    const { data: dataInfo, run: runDataList, loading: customerListLoading } = useRequest(async () => {
     const res = await axios.get('/system/dataset/show/list', {
       params: searchInfo,
-      baseURL: "https://api.ai4as.cn"
+      baseURL: "http://47.99.151.88:10105"
     });
     return {
       list: res.data?.rows || [],

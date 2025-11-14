@@ -1,12 +1,40 @@
-import React, { useState } from 'react';
-import { Layout, Typography, Row, Col, Card, Button, Space, Statistic, Carousel } from 'antd';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Layout, Typography, Row, Col, Card, Button, Space, Statistic, Carousel, Spin, message } from 'antd';
+import axios from 'axios';
 import './index.less';
 const { Title, Paragraph, Text } = Typography;
 
 const { Content } = Layout;
 
+interface DescriptionData {
+  id: number;
+  title: string;
+  content: string;
+  type: string;
+  create_by?: string;
+  create_time?: string;
+  update_by?: string;
+  update_time?: string;
+  del_flag?: string;
+  status?: string;
+  remark?: string;
+  ossId?: number;
+}
+
+interface ApiResponse {
+  code: number;
+  msg: string;
+  data: DescriptionData;
+}
+
 const PlatformIntro: React.FC = () => {
   const [activeTab, setActiveTab] = useState('about');
+  const [aboutUsContent, setAboutUsContent] = useState<string>('');
+  const [partnersContent, setPartnersContent] = useState<string>('');
+  const [cooperationContent, setCooperationContent] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+  const [partnersLoading, setPartnersLoading] = useState(false);
+  const [cooperationLoading, setCooperationLoading] = useState(false);
 
   const tabs = [
     { key: 'about', label: '关于我们' },
@@ -21,6 +49,79 @@ const PlatformIntro: React.FC = () => {
     { name: '商雪兰', title: '设计总监', avatar: 'https://via.placeholder.com/80x80?text=商雪兰' },
     { name: '尤德枫', title: '市场总监', avatar: 'https://via.placeholder.com/80x80?text=尤德枫' }
   ];
+
+  // 获取关于我们内容
+  const fetchAboutUsContent = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get('/system/description/getDescription/platform_introduction', {
+        baseURL: 'http://47.99.151.88:10105'
+      });
+
+      if (data.code === 200 && data.data) {
+        setAboutUsContent(data.data.content || '');
+      } else {
+        message.error(data.msg || '获取内容失败');
+      }
+    } catch (error) {
+      console.error('获取关于我们内容失败:', error);
+      message.error('获取内容失败，请稍后重试');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // 获取共建单位内容
+  const fetchPartnersContent = useCallback(async () => {
+    setPartnersLoading(true);
+    try {
+      const { data } = await axios.get('/system/description/getDescription/intelligent_breeding', {
+        baseURL: 'http://47.99.151.88:10105'
+      });
+
+      if (data.code === 200 && data.data) {
+        setPartnersContent(data.data.content || '');
+      } else {
+        message.error(data.msg || '获取内容失败');
+      }
+    } catch (error) {
+      console.error('获取共建单位内容失败:', error);
+      message.error('获取内容失败，请稍后重试');
+    } finally {
+      setPartnersLoading(false);
+    }
+  }, []);
+
+  // 获取合作与交流内容
+  const fetchCooperationContent = useCallback(async () => {
+    setCooperationLoading(true);
+    try {
+      const { data } = await axios.get('/system/description/getDescription/connect', {
+        baseURL: 'http://47.99.151.88:10105'
+      });
+
+      if (data.code === 200 && data.data) {
+        setCooperationContent(data.data.content || '');
+      } else {
+        message.error(data.msg || '获取内容失败');
+      }
+    } catch (error) {
+      console.error('获取合作与交流内容失败:', error);
+      message.error('获取内容失败，请稍后重试');
+    } finally {
+      setCooperationLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeTab === 'about') {
+      fetchAboutUsContent();
+    } else if (activeTab === 'partners') {
+      fetchPartnersContent();
+    } else if (activeTab === 'cooperation') {
+      fetchCooperationContent();
+    }
+  }, [activeTab, fetchAboutUsContent, fetchPartnersContent, fetchCooperationContent]);
 
   const renderAboutUsContent = () => (
     <div className="about-us-content">
@@ -39,125 +140,48 @@ const PlatformIntro: React.FC = () => {
         </div>
       </div>
       <div className="text-section">
-        <div className="description">
-          岑海燕教授团队致力于植物光学成像与智能感知技术研究，研究方向包括高通量植物表型分析（涵盖3D形态结构、营养生理、光合生理）、多尺度农业遥感、作物组织光学、深度学习、辐射传输模型及其在精准农业管理与智慧育种中的应用。
-        </div>
+        {loading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '200px' }}>
+            <Spin size="large" />
+          </div>
+        ) : (
+          <div 
+            className="description"
+            dangerouslySetInnerHTML={{ __html: aboutUsContent || '暂无内容' }}
+          />
+        )}
       </div>
     </div>
   );
 
   const renderPartnersContent = () => (
     <div className="partners-content">
-      <div className="carousel-section">
-        <div className="carousel-container">
-          <div className="carousel-arrow">‹</div>
-          <div className="carousel-images">
-            <div className="carousel-item">
-              <img 
-                className="image" 
-                src="https://via.placeholder.com/300x200?text=牧目科技" 
-                alt="牧目科技" 
-              />
-              <div className="company-name">牧目科技</div>
-            </div>
-            <div className="carousel-item">
-              <img 
-                className="image" 
-                src="https://via.placeholder.com/300x200?text=合作单位" 
-                alt="合作单位" 
-              />
-            </div>
-            <div className="carousel-item">
-              <img 
-                className="image" 
-                src="https://via.placeholder.com/300x200?text=整数智能" 
-                alt="整数智能" 
-              />
-              <div className="company-name">整数智能</div>
-            </div>
-          </div>
-          <div className="carousel-arrow">›</div>
+      {partnersLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+          <Spin size="large" />
         </div>
-        <div className="university-name">
-          浙江大学生物系统工程与食品科学学院
-        </div>
-      </div>
-      
-      <div className="team-section">
-        <div className="team-sidebar">
-          <div className="team-title">我们的团队</div>
-        </div>
-        <div className="team-grid">
-          <div className="team-row">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="team-member">
-                <img 
-                  className="member-avatar" 
-                  src={member.avatar} 
-                  alt={member.name} 
-                />
-                <div className="member-name">{member.name}</div>
-                <div className="member-title">{member.title}</div>
-              </div>
-            ))}
-          </div>
-          <div className="team-row">
-            {teamMembers.map((member, index) => (
-              <div key={`second-${index}`} className="team-member">
-                <img 
-                  className="member-avatar" 
-                  src={member.avatar} 
-                  alt={member.name} 
-                />
-                <div className="member-name">{member.name}</div>
-                <div className="member-title">{member.title}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      ) : (
+        <div 
+          className="partners-text-content"
+          dangerouslySetInnerHTML={{ __html: partnersContent || '暂无内容' }}
+        />
+      )}
     </div>
   );
 
   const renderCooperationContent = () => (
-        <div style={{ 
-        background: 'white',
-        padding: '80px 0'
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <Row gutter={[100, 32]}>
-            <Col xs={14}>
-              <div id="map-container" style={{
-                background: '#f5f5f5',
-                borderRadius: '12px',
-                height: '520px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <Text style={{ color: '#8c8c8c', fontSize: '16px' }}>
-                  地图区域
-                </Text>
-              </div>
-            </Col>
-            <Col xs={10}>
-              <div>
-                <Title level={4} style={{ marginBottom: '48px', fontSize: '22px', marginTop: '48px' }}>
-                  合作交流
-                </Title>
-                <div style={{ fontSize: '18px', color: '#000', fontWeight: 'bold' , marginBottom: '24px'}}>官方邮箱</div>
-                <div style={{fontSize: 16, color: '#000', marginBottom: '32px'}}>zjdxcenlab@163.com</div>
-                <div style={{ fontSize: '18px', color: '#000', fontWeight: 'bold' , marginBottom: '24px'}}>联系地址</div>
-                <div style={{fontSize: 16, color: '#000', marginBottom: '32px'}}>浙江省杭州市西湖区余杭塘路866号浙江大学生物系统工程与食品科学学院</div>
-                <Title level={4} style={{ marginTop: '68px', marginBottom: '24px', fontSize: '22px' }}>
-                友情链接
-                </Title>
-                <div style={{fontSize: 16, color: '#000', textDecoration: 'underline'}}>浙江大学生工食品学院</div>
-              </div>
-            </Col>
-          </Row>
+    <div className="cooperation-content">
+      {cooperationLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+          <Spin size="large" />
         </div>
-        </div>
+      ) : (
+        <div 
+          className="cooperation-text-content"
+          dangerouslySetInnerHTML={{ __html: cooperationContent || '暂无内容' }}
+        />
+      )}
+    </div>
   );
 
   const renderContent = () => {

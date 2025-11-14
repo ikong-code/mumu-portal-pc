@@ -34,9 +34,9 @@ const NewsList: React.FC = () => {
           pageSize: pageSize,
           isShow: 1
         },
-        baseURL: 'https://api.ai4as.cn'
+        baseURL: 'http://47.99.151.88:10105'
       });
-      return res.data;
+      return res.data?.data?.rows || [];
     },
     {
       refreshDeps: [currentPage],
@@ -78,10 +78,10 @@ const NewsList: React.FC = () => {
           <div className="news-list-loading">
             <Spin size="large" />
           </div>
-        ) : newsData?.rows?.length ? (
+        ) : newsData?.length ? (
           <>
             <Row gutter={[24, 24]} className="news-grid">
-              {newsData.rows.map((item: NewsItem) => (
+              {newsData?.map((item: NewsItem) => (
                 <Col xs={24} sm={12} lg={8} key={item.id}>
                   <Card
                     hoverable

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmumu_portal_pc=self.webpackChunkmumu_portal_pc||[]).push([[697],{87697:function(l,u,t){t.r(u),t.d(u,{default:function(){return o}});var m=t(75271),n=t(50444),E=t(52676);function o(){var c=(0,n.useOutletContext)();return(0,E.jsx)(n.Outlet,{context:c})}}}]);

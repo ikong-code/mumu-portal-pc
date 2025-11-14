@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import axios from 'axios';
+import { useNavigate } from '@umijs/max';
 import './index.less';
 
 const { Title, Paragraph, Text } = Typography;
@@ -20,6 +21,7 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 const DataExchange: React.FC = () => {
+  const navigate = useNavigate();
   const [searchInfo, setSearchInfo] = useState({
     datasetName: '',
     pageNum: 1,
@@ -30,7 +32,7 @@ const DataExchange: React.FC = () => {
    const { data: dataInfo, run: runDataList, loading: customerListLoading } = useRequest(async () => {
     const res = await axios.get('/system/datasetDemand/user/show/list', {
       params: searchInfo,
-      baseURL: "https://api.ai4as.cn"
+      baseURL: "http://47.99.151.88:10105"
     });
     return {
       list: res.data?.rows || [],
@@ -79,7 +81,7 @@ const DataExchange: React.FC = () => {
                 </div>
               </div>
               
-              <Button type="primary" className="detail-button">
+              <Button type="primary" onClick={() => navigate(`/data-collection/detail?id=${item.id}`)} className="detail-button">
                 了解详情
               </Button>
             </div>

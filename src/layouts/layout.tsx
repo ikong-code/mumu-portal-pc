@@ -13,6 +13,7 @@ const pageBackgrounds = {
   '/data-exchange': '/src/assets/images/loginBg.jpg',
   '/data-collection': '/src/assets/images/loginBg.jpg',
   '/usage-guide': '/src/assets/images/loginBg.jpg',
+  '/usage-guide/detail': '/src/assets/images/loginBg.jpg',
   '/login-console': '/src/assets/images/loginBg.jpg',
 };
 
@@ -23,16 +24,18 @@ const pageTitles = {
   '/data-exchange': { title: '数据汇交', subtitle: 'Data Exchange' },
   '/data-collection': { title: '数据征集', subtitle: 'Data Collection' },
   '/usage-guide': { title: '使用说明', subtitle: 'Usage Guide' },
+  '/usage-guide/detail': { title: '使用说明详情', subtitle: 'Usage Guide Detail' },
   '/login-console': { title: '登录控制台', subtitle: 'Login Console' },
 };
 
 const BasicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
   const currentPath = location.pathname;
-  
+  console.log(currentPath, pageBackgrounds[currentPath as keyof typeof pageBackgrounds], 'currentPath')
   const backgroundImage = pageBackgrounds[currentPath as keyof typeof pageBackgrounds] || '/src/assets/images/loginBg.jpg';
   const pageInfo = pageTitles[currentPath as keyof typeof pageTitles] || { title: '平台介绍', subtitle: 'About Us' };
 
+  
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header 

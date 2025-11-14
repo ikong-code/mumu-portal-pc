@@ -99,13 +99,13 @@ const Header: React.FC<HeaderProps> = () => {
   ];
 
   const { data: announcementData } = useRequest(async () => {
-     const res = await axios.get('//system/dict/data/list', {
+     const res = await axios.get('/system/dict/data/list', {
       params: {
         dictType: "broadcast",
         pageNum: 1,
         pageSize: 10
       },
-      baseURL: "https://api.ai4as.cn"
+      baseURL: "http://47.99.151.88:10105"
      });
      console.log(res, 'res')
      return res.data?.rows || [];
@@ -143,7 +143,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   console.log(location.pathname, 'location.pathname')
   const renderBannerContent = useMemo(() => {
-      if (location.pathname === '/home/index') {
+      if (location.pathname === '/home') {
         return {
           content: <PortalBannerContent />,
           bannerBg: PortalBannerBg
@@ -175,7 +175,7 @@ const Header: React.FC<HeaderProps> = () => {
       }
       return null;
   }, [location.pathname]);
-  console.log(location.pathname, 'location.pathname')
+  console.log(location.pathname, !renderBannerContent, 'location.pathname')
 
   if(!renderBannerContent) {
     

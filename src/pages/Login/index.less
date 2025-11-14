@@ -6,6 +6,7 @@
 .login-content {
   height: 100vh;
   padding: 0;
+  min-width: 1200px;
 }
 
 .login-row {
@@ -17,6 +18,7 @@
 
 .login-bg {
   width: 60%;
+  height: 100%;
 }
 
 .login-form-container {
@@ -40,6 +42,16 @@
   width: 100%;
   max-width: 80%;
   padding: 40px;
+}
+
+.login-form-register {
+  .ant-form-item {
+    margin-bottom: 8px;
+  }
+  label {
+    height: 28px !important;
+    line-height: 28px;
+  }
 }
 
 /* Logo和标题区域 */
@@ -170,28 +182,7 @@
     }
   }
 
-  .form-submit {
-    margin-bottom: 24px;
 
-    .login-button {
-      height: 48px;
-      background: #50935a;
-      border-color: #50935a;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 500;
-
-      &:hover {
-        background: #73d13d;
-        border-color: #73d13d;
-      }
-
-      &:focus {
-        background: #50935a;
-        border-color: #50935a;
-      }
-    }
-  }
 
   .register-link {
     text-align: center;
@@ -263,5 +254,36 @@
     .institute-subtitle {
       font-size: 10px;
     }
+  }
+}
+
+
+.form-submit {
+  margin-bottom: 24px;
+
+  .login-button {
+    height: 48px;
+    background: #50935a;
+    border-color: #50935a;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+
+    &:hover {
+      background: #73d13d;
+      border-color: #73d13d;
+    }
+
+    &:focus {
+      background: #50935a;
+      border-color: #50935a;
+    }
+  }
+}
+
+.login-input-with-code {
+  .ant-input-group-addon {
+    padding: 0 !important;
+    border: none !important;
   }
 }

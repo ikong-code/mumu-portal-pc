@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Typography, Card, Spin, Button, Breadcrumb } from 'antd';
+import { Layout, Typography, Card, Spin, Breadcrumb, Row, Col, List } from 'antd';
 import { ArrowLeftOutlined, CalendarOutlined, EyeOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import axios from 'axios';
@@ -20,6 +20,13 @@ interface NewsDetail {
   publishTime: string;
 }
 
+interface NewsItem {
+  id: string;
+  title: string;
+  description: string;
+  publishTime: string;
+}
+
 const NewsDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -28,9 +35,31 @@ const NewsDetail: React.FC = () => {
   const { data: newsDetail, loading } = useRequest<NewsDetail, [string]>(
     async () => {
       const res = await axios.get(`/system/newsPolicy/${id}`, {
-        baseURL: 'https://api.ai4as.cn'
+        baseURL: 'http://47.99.151.88:10105'
       });
       return res.data?.data;
+    },
+    {
+      refreshDeps: [id],
+      manual: false
+    }
+  );
+
+  console.log(newsDetail, 'newsDetail');
+
+  // 获取右侧相关内容
+  const { data: relatedData } = useRequest(
+    async () => {
+      const res = await axios.get('/system/newsPolicy/list', {
+        params: {
+          pageNum: 1,
+          pageSize: 5,
+          isShow: 1
+        },
+        baseURL: 'http://47.99.151.88:10105'
+      });
+      console.log(res.data, 'res.data');  
+      return res.data?.data?.rows || [];
     },
     {
       refreshDeps: [id],
@@ -62,13 +91,17 @@ const NewsDetail: React.FC = () => {
     navigate('/home/news');
   };
 
+  const handleNavigateDetail = (newsId: string) => {
+    navigate(`/home/news/${newsId}`);
+  };
+
   return (
     <Content className="news-detail-container">
       <div className="news-detail-header">
         <div className="news-detail-breadcrumb">
           <Breadcrumb separator=">">
             <Breadcrumb.Item onClick={handleBack} >
-                <span style={{ cursor: 'pointer', color: '#fa8c16' }}>新闻动态</span>
+                <span style={{ cursor: 'pointer', }}>新闻动态</span>
             </Breadcrumb.Item>
             <Breadcrumb.Item>新闻详情</Breadcrumb.Item>
           </Breadcrumb>
@@ -76,53 +109,54 @@ const NewsDetail: React.FC = () => {
       </div>
 
       <div className="news-detail-content-wrapper">
-        {loading ? (
-          <div className="news-detail-loading">
-            <Spin size="large" />
-          </div>
-        ) : newsDetail ? (
-          <Card className="news-detail-card">
-            <div className="news-detail-meta">
-              <div className="news-detail-date">
-                <CalendarOutlined />
-                <Text>{formatDate(newsDetail.publishTime)}</Text>
+        <Row gutter={[24, 24]}>
+          <Col xs={24} lg={16}>
+            {loading ? (
+              <div className="news-detail-loading">
+                <Spin size="large" />
               </div>
-            </div>
+            ) : newsDetail ? (
+              <Card className="news-detail-card">
+                <div className="news-detail-meta">
+                  <div className="news-detail-date">
+                    <CalendarOutlined />
+                    <Text>{formatDate(newsDetail.publishTime)}</Text>
+                  </div>
+                </div>
 
-            <Title level={1} className="news-detail-title">
-              {newsDetail.title}
-            </Title>
+                <Title level={1} className="news-detail-title">
+                  {newsDetail.title}
+                </Title>
+                <div dangerouslySetInnerHTML={{ __html: newsDetail.context }}>
 
-            {newsDetail.imgPath && (
-              <div className="news-detail-image">
-                <img 
-                  src={newsDetail.imgPath} 
-                  alt={newsDetail.title}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                  }}
-                />
-              </div>
+                </div>
+              </Card>
+            ) : (
+              <Card className="news-detail-card">
+                <div className="news-detail-empty">
+                  <Text>新闻不存在或已被删除</Text>
+                </div>
+              </Card>
             )}
+          </Col>
 
-            <div className="news-detail-description">
-              <Text>{newsDetail.description}</Text>
-            </div>
-
-            {newsDetail.context && (
-              <div className="news-detail-body">
-                {renderContent(newsDetail.context)}
-              </div>
-            )}
-          </Card>
-        ) : (
-          <Card className="news-detail-card">
-            <div className="news-detail-empty">
-              <Text>新闻不存在或已被删除</Text>
-            </div>
-          </Card>
-        )}
+          <Col xs={24} lg={8}>
+            <Card className="news-related-card" title="相关内容" bordered>
+              <List
+                itemLayout="vertical"
+                dataSource={relatedData || []}
+                renderItem={(item: NewsItem) => (
+                  <List.Item className="news-related-item" onClick={() => handleNavigateDetail(item.id)}>
+                    <div className="news-related-title" title={item.title}>{item.title}</div>
+                    {item.description ? (
+                      <div className="news-related-desc" title={item.description}>{item.description}</div>
+                    ) : null}
+                  </List.Item>
+                )}
+              />
+            </Card>
+          </Col>
+        </Row>
       </div>
     </Content>
   );

@@ -7,13 +7,18 @@ import {
   ShareAltOutlined,
   DownloadOutlined
 } from '@ant-design/icons';
+import { history } from 'umi';
 import './index.less';
-import IMG1 from '../../assets/images/usage-guide/usage-img1.png'
-import IMG2 from '@/assets/images/usage-guide/usage-img7.png'
+const IMG1 = require('@/assets/images/usage-guide/usage-img1.png');
+const IMG2 = require('@/assets/images/usage-guide/usage-img7.png');
 
 const { Title, Paragraph } = Typography;
 
 const UsageGuide: React.FC = () => {
+  const handleDetailClick = (type: string) => {
+    history.push(`/usage-guide/detail?type=${type}`);
+  };
+
   return (
     <div className="usage-guide">
       {/* 数据共享页面 */}
@@ -35,7 +40,13 @@ const UsageGuide: React.FC = () => {
               <Paragraph className="content-text">
                 支持在线管理、共享各类农作物图像数据集,经平台审核后,研究人员和开发者可查看、追溯和引用共享数据集,用于农作物生长监测和病虫害识别等研究。
               </Paragraph>
-              <Button type="primary" className="content-button">了解详情</Button>
+              <Button 
+                type="primary" 
+                className="content-button"
+                onClick={() => handleDetailClick('data_service')}
+              >
+                了解详情
+              </Button>
             </div>
 
             {/* 中央 - 圆形图片框架 */}
@@ -57,7 +68,13 @@ const UsageGuide: React.FC = () => {
               <Paragraph className="content-text">
                 为促进数据资源的高效利用,提升数据价值,保障合法权益,特制定本数据共享权益说明,以明确数据提供方与使用方在平台中的权利与义务。
               </Paragraph>
-              <Button type="primary" className="content-button">了解详情</Button>
+              <Button 
+                type="primary" 
+                className="content-button"
+                onClick={() => handleDetailClick('data_standards')}
+              >
+                了解详情
+              </Button>
             </div>
           </div>
         </div>
@@ -69,7 +86,13 @@ const UsageGuide: React.FC = () => {
           <Paragraph className="cloud-disk-description">
             "我的云盘"是ADDS平台为每位注册用户提供的数据存储与管理空间,用于上传、下载和管理您在平台上共享的数据集,是对数据进行操作的唯一入口。
           </Paragraph>
-          <Button type="primary" className="cloud-disk-button">了解详情</Button>
+          <Button 
+            type="primary" 
+            className="cloud-disk-button"
+            onClick={() => handleDetailClick('data_standards')}
+          >
+            了解详情
+          </Button>
         </div>
       </div>
       {/* 标注平台使用区域 */}
@@ -99,7 +122,13 @@ const UsageGuide: React.FC = () => {
                   标注完成后，点击"获取导出结果"将数据保存到"下载"文件夹。
                 </Paragraph>
               </div>
-              <Button type="primary" className="annotation-platform-button">了解详情</Button>
+              <Button 
+                type="primary" 
+                className="annotation-platform-button"
+                onClick={() => handleDetailClick('sharing_protocol')}
+              >
+                了解详情
+              </Button>
             </div>
 
             {/* 右侧笔记本图片 */}
@@ -130,14 +159,25 @@ const UsageGuide: React.FC = () => {
             <Paragraph className="panel-text">
               平台提供数据征集发布功能,支持科研人员、机构用户、企业等提出特定数据需求,通过设置征集金额,吸引其他用户响应上传符合要求的数据集。请根据以下说明正确填写征集信息,确保数据供需匹配高效完成。
             </Paragraph>
-            <Button type="primary" className="panel-button">了解详情</Button>
+            <Button 
+              type="primary" 
+              className="panel-button"
+              onClick={() => handleDetailClick('annotation_guide')}
+            >
+              了解详情
+            </Button>
           </div>
           <div className="panel-right">
             <Title level={2} className="panel-title">数据征集权益说明</Title>
             <Paragraph className="panel-text">
               为促进数据资源的高效利用,创建数据所有者与数据使用者之间的桥梁,保障双方的合法权益,特制定本数据征集权益说明,以明确数据提供方与使用方在平台中的权利与义务。
             </Paragraph>
-            <Button className="panel-button-white">了解详情</Button>
+            <Button 
+              className="panel-button-white"
+              onClick={() => handleDetailClick('data_collection')}
+            >
+              了解详情
+            </Button>
           </div>
         </div>
       </div>
@@ -203,7 +243,14 @@ const UsageGuide: React.FC = () => {
           </div>
 
           <div className="tutorial-cta">
-            <Button type="primary" size="large" className="cta-button">了解详情</Button>
+            <Button 
+              type="primary" 
+              size="large" 
+              className="cta-button"
+              onClick={() => handleDetailClick('sharing_protocol')}
+            >
+              了解详情
+            </Button>
           </div>
         </div>
       </div>

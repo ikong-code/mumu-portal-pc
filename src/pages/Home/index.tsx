@@ -19,9 +19,9 @@ const { Content } = Layout;
 import portalImg1 from '@/assets/images/portal/img1.png';
 import portalImg2 from '@/assets/images/portal/img2.png';
 import portalImg3 from '@/assets/images/portal/img3.png';
-
 import PortalBanner from '@/assets/images/portal/banner.png';
 import PortalBg3 from '@/assets/images/portal/portal-bg3.png';
+import dayjs from 'dayjs';
 
 
 const Home: React.FC = () => {
@@ -29,14 +29,14 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const features = [
     {
-      link: '/data-exchange',
+      link: '/usage-guide/detail?type=data_service',
       icon: portalImg1,
       title: '数据共享',
       description: '支持用户在线管理和共享各类型低空遥感相关数据集，并在平台审核后发布。开发者可以通过搜索用户共享的数据集，实现数据可查看、可追溯、可引用，助力科研合作与产业落地。',
       buttonText: '了解详情'
     },
     {
-      link: '/data-exchange',
+      link: '/data-collection',
       icon: portalImg2,
       title: '数据标注',
       description: '支持包括可见光数据、多光谱数据、高光谱数据、热红外数据、点云数据等多种数据集的制作，平台提供标准化的数据标注工具，支撑产量预测、病害诊断等人工智能技术与应用的开发。',
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
   // 获取使用数据
   const { data: userData, loading: userDataLoading } = useRequest(async () => {
     const res = await axios.get('/system/front/user/getHomeData', {
-      baseURL: "https://api.ai4as.cn"
+      baseURL: "http://47.99.151.88:10105"
     });
     return res.data?.data;
   }, {
@@ -69,9 +69,10 @@ const Home: React.FC = () => {
         pageSize: 6,
         pageNum: 1
       },
-      baseURL: "https://api.ai4as.cn"
+      baseURL: "http://47.99.151.88:10105"
     });
-    return res.data?.rows || [];
+    console.log(res.data, 'res.data')
+    return res.data?.data?.rows || [];
   }, {
     manual: false
   });
@@ -79,9 +80,10 @@ const Home: React.FC = () => {
   // 获取合作伙伴数据
   const { data: customerList, loading: customerListLoading } = useRequest(async () => {
     const res = await axios.get('/system/customer/get', {
-      baseURL: "https://api.ai4as.cn"
+      baseURL: "http://47.99.151.88:10105"
     });
-    return res.data || [];
+    console.log(res.data.data, 'res.data');
+    return res?.data?.data || [];
   }, {
     manual: false
   });
@@ -256,7 +258,7 @@ const Home: React.FC = () => {
                         {item.title}
                       </Text>
                       <Text className="home-news-item-date">
-                        {item.publishTime}
+                        {dayjs(item.publishTime).format('YYYY-MM-DD')}
                       </Text>
                     </div>
                   </div>

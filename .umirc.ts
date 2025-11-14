@@ -60,12 +60,30 @@ export default defineConfig({
     {
       name: '数据征集',
       path: '/data-collection',
-      component: './DataCollection',
+      routes: [
+        {
+          path: '/data-collection',
+          component: './DataCollection/index',
+        },
+        {
+          path: '/data-collection/detail',
+          component: './DataCollection/Detail',
+        },
+      ],
     },
     {
       name: '使用说明',
       path: '/usage-guide',
-      component: './UsageGuide',
+      routes: [
+        {
+          path: '/usage-guide',
+          component: './UsageGuide',
+        },
+        {
+          path: '/usage-guide/detail',
+          component: './UsageGuide/Detail',
+        },
+      ],
     },
     {
       name: '登录控制台',
