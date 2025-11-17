@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
 // 配置axios默认请求拦截器：自动添加Authorization header
@@ -21,13 +22,20 @@ axios.interceptors.request.use(
 // 配置axios默认响应拦截器（可选，用于统一处理错误）
 axios.interceptors.response.use(
   (response) => {
+    console.log(response, 'response');
+    if(response.data.code === 401) {
+      window.location.href = '/login';
+      message.warning('登录已过期，请重新登录');
+      return;
+    }
     return response;
   },
   (error) => {
+    console.log(error, 'error');
     // 可以在这里处理401等认证错误
     if (error.response?.status === 401) {
       // token过期或无效，可以跳转到登录页
-      // window.location.href = '/login';
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   }

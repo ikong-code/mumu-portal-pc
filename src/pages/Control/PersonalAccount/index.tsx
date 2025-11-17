@@ -1,12 +1,36 @@
-import React, { useState } from 'react';
-import { Button, Card, Form, Input, Select, Avatar, Row, Col, Statistic, Space, message, Modal, Upload } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Card, Form, Input, Select, Avatar, Row, Col, Statistic, Space, message, Modal, Upload, Spin } from 'antd';
 import { UserOutlined, EditOutlined, LockOutlined, LogoutOutlined, UploadOutlined, SaveOutlined, CloseOutlined } from '@ant-design/icons';
+import axios from '@/utils/request';
 import './index.less';
 
 const { Option } = Select;
 
+interface UserInfo {
+  userId: string;
+  userName: string;
+  nickName: string;
+  userType: string;
+  email: string;
+  phonenumber: string;
+  sex: string;
+  status: string;
+  loginIp: string;
+  loginDate: string;
+  aduitStatus: string;
+  aduitTime: string;
+  aduitName: string;
+  aduitIdcard: string;
+  aduitPositions: string;
+  aduitUnit: string;
+  aduitTitle: string;
+  aduitWebsite: string;
+}
+
 const PersonalAccount: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [form] = Form.useForm();
 
   const handleEdit = () => {
@@ -26,7 +50,23 @@ const PersonalAccount: React.FC = () => {
       content: '确定要取消编辑吗？未保存的修改将丢失。',
       onOk() {
         setIsEditing(false);
-        form.resetFields();
+        // 恢复原始数据
+        if (userInfo) {
+          let gender = 'male';
+          if (userInfo.sex === '1') {
+            gender = 'male';
+          } else if (userInfo.sex === '2') {
+            gender = 'female';
+          }
+          form.setFieldsValue({
+            account: userInfo.userName || '',
+            nickname: userInfo.nickName || '',
+            userType: userInfo.userType || '',
+            email: userInfo.email || '',
+            phone: userInfo.phonenumber || '',
+            gender: gender,
+          });
+        }
       },
     });
   };
@@ -38,6 +78,82 @@ const PersonalAccount: React.FC = () => {
   const handleLogout = () => {
     message.info('退出登录功能待开发');
   };
+
+  // 获取用户信息
+  const fetchUserInfo = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('/system/front/user/getUserInfo', {
+        baseURL: 'http://47.99.151.88:10105'
+      });
+      
+      if (response.data.code === 200 && response.data.data) {
+        const data = response.data.data;
+        setUserInfo(data);
+        
+        // 将性别转换为表单需要的格式
+        // 根据常见编码：sex: "0" 表示未知/未设置, "1" 表示男, "2" 表示女
+        // 如果 sex 为 "0" 或其他值，默认显示为"男"
+        let gender = 'male';
+        if (data.sex === '1') {
+          gender = 'male';
+        } else if (data.sex === '2') {
+          gender = 'female';
+        } else {
+          // sex 为 "0" 或其他值时，默认显示为"男"
+          gender = 'male';
+        }
+        
+        // 设置表单初始值
+        form.setFieldsValue({
+          account: data.userName || '',
+          nickname: data.nickName || '',
+          userType: data.userType || '',
+          email: data.email || '',
+          phone: data.phonenumber || '',
+          gender: gender,
+        });
+      } else {
+        message.error(response.data.msg || '获取用户信息失败');
+      }
+    } catch (error: any) {
+      console.error('获取用户信息失败:', error);
+      message.error('获取用户信息失败，请稍后重试');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
+  // 根据审核状态显示标题
+  const getAuditStatusText = () => {
+    if (!userInfo) return '用户信息';
+    if (userInfo.aduitStatus === '1') {
+      return '用户信息 (审核通过)';
+    } else if (userInfo.aduitStatus === '0') {
+      return '用户信息 (待审核)';
+    } else {
+      return '用户信息 (审核未通过)';
+    }
+  };
+
+  // 性别转换函数
+  const getGenderText = (sex: string) => {
+    if (sex === '1') return '男';
+    if (sex === '2') return '女';
+    return '未知';
+  };
+
+  if (loading && !userInfo) {
+    return (
+      <div style={{ textAlign: 'center', padding: '50px' }}>
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   return (
     <div className="personal-account">
@@ -68,7 +184,7 @@ const PersonalAccount: React.FC = () => {
       </div>
 
       {/* 用户信息 */}
-      <Card title="用户信息 (审核通过)" style={{ marginBottom: 20 }}>
+      <Card title={getAuditStatusText()} style={{ marginBottom: 20 }}>
         <Row gutter={24}>
           <Col span={6}>
             <div className="user-avatar">
@@ -89,21 +205,13 @@ const PersonalAccount: React.FC = () => {
               ) : (
                 <Avatar size={80} icon={<UserOutlined />} />
               )}
-              <div className="user-email">wgxing0330@mumutech.co</div>
+              <div className="user-email">{userInfo?.email || userInfo?.userName || ''}</div>
             </div>
           </Col>
           <Col span={18}>
             <Form
               form={form}
               layout="vertical"
-              initialValues={{
-                account: 'wgxing0330@mumutech.co',
-                nickname: 'wgxing0330@mumutech.co',
-                userType: 'user',
-                email: 'wgxing0330@mumutech.co',
-                phone: '18768119526',
-                gender: 'male',
-              }}
             >
               <Row gutter={16}>
                 <Col span={12}>
@@ -146,37 +254,37 @@ const PersonalAccount: React.FC = () => {
       </Card>
 
       {/* 审核信息 - 仅在非编辑模式下显示 */}
-      {!isEditing && (
+      {!isEditing && userInfo && (
         <Card title="审核信息" style={{ marginBottom: 20 }}>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="真实姓名">
-                <Input value="王涛" disabled />
+                <Input value={userInfo.aduitName || '暂无'} disabled />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item label="身份证号">
-                <Input value="330105199203301618" disabled />
+                <Input value={userInfo.aduitIdcard || '暂无'} disabled />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item label="职位">
-                <Input value="暂无" disabled />
+                <Input value={userInfo.aduitPositions || '暂无'} disabled />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item label="所在单位">
-                <Input value="牧目科技有限责任公司" disabled />
+                <Input value={userInfo.aduitUnit || '暂无'} disabled />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item label="职称">
-                <Input value="CEO" disabled />
+                <Input value={userInfo.aduitTitle || '暂无'} disabled />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item label="个人网站">
-                <Input value="暂无" disabled />
+                <Input value={userInfo.aduitWebsite || '暂无'} disabled />
               </Form.Item>
             </Col>
           </Row>

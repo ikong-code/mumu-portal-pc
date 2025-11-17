@@ -165,5 +165,52 @@
       border-color: #f0a13e;
     }
   }
+
+  // 筛选按钮区域
+  .filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 40px 24px;
+    background: #E0F6FF;
+    margin-bottom: 24px;
+  }
+
+  .filter-button {
+    min-width: 200px;
+    height: 60px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.publish-button {
+      background: #1890ff;
+      &:hover {
+        background: #40a9ff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+      }
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &.find-button {
+      background: #1890ff;
+      &:hover {
+        background: #40a9ff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+      }
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
   
   

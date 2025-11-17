@@ -25,7 +25,7 @@ const pageTitles = {
   '/data-collection': { title: '数据征集', subtitle: 'Data Collection' },
   '/usage-guide': { title: '使用说明', subtitle: 'Usage Guide' },
   '/usage-guide/detail': { title: '使用说明详情', subtitle: 'Usage Guide Detail' },
-  '/login-console': { title: '登录控制台', subtitle: 'Login Console' },
+  '/login-console': { title: '我的控制台', subtitle: 'Login Console' },
 };
 
 const BasicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

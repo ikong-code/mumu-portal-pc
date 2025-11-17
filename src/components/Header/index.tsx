@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = () => {
     },
     {
       key: '/control/personal-account',
-      label: '登录控制台',
+      label: '我的控制台',
       path: '/control/personal-account'
     },
   ];

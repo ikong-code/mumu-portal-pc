@@ -47,6 +47,20 @@ const DataExchange: React.FC = () => {
   return (
     <Content style={{ padding: '0 24px', background: 'white' }}>
       {/* Hero Section */}
+        <div className="filter">
+          <Button 
+            className="filter-button publish-button"
+            onClick={() => navigate('/control/datasets')}
+          >
+            我要发布数据
+          </Button>
+          <Button 
+            className="filter-button find-button"
+            onClick={() => navigate('/control/data-requirements')}
+          >
+            我要找数据
+          </Button>
+          </div>
       <div className="data-collection-list">
         {dataInfo?.list?.map((item: any, idx: number) => (
           <div key={item.id} className={`data-collection-item ${idx % 2 === 1 ? 'data-collection-item-reverse' : ''}`}>
